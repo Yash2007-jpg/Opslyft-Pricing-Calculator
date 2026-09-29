@@ -14,10 +14,10 @@ export const DEFAULT_FILTERS: Filters = {
   sort: "price",
 };
 
-export function filterInstances(f: Filters): Instance[] {
+export function filterInstances(f: Filters, source: Instance[] = INSTANCES): Instance[] {
   const q = f.query.toLowerCase().trim();
   const price = (i: Instance) => unitHourly(i, f.region, f.os, f.model);
-  const list = INSTANCES.filter(
+  const list = source.filter(
     (i) =>
       (f.workload === "all" || i.workloads.includes(f.workload)) &&
       (f.arch === "all" || i.arch === f.arch) &&
